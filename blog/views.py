@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from blog.models import Post
+from blog.forms import PostForm
 from django.views.generic.base import TemplateView , RedirectView
-from django.views.generic import ListView , DetailView
+from django.views.generic import ListView , DetailView , CreateView , UpdateView , DeleteView
 
 # create the class base views
 class IndexView(TemplateView) :
@@ -33,4 +34,24 @@ class PostListView(ListView) :
 class PostDetail(DetailView) :
     model = Post
     context_object_name = 'post'
-    
+
+
+class CreatePost(CreateView) :
+    model = Post
+    form_class = PostForm
+    success_url = '/blog/posts/'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+class UpdatePostView(UpdateView) :
+    model = Post
+    form_class = PostForm
+    success_url = '/blog/posts/'
+
+
+class DeletePostView(DeleteView) :
+    model = Post
+    success_url = '/blog/posts/'
+    context_object_name = 'post'
