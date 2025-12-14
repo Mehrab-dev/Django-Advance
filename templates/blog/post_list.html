@@ -8,7 +8,7 @@
 <body>
     {% for post in posts %}
     <a href="{% url 'blog:detail_post' pk=post.id %}"><h2>{{post.id}}  -  {{post.title}}</h2></a>
-    <h5>{{post.author}}  -  {{post.published_date}}</h5>
+    <h5>{{post.author.first_name}}   {{post.author.last_name}}  -  {{post.published_date}}</h5>
     <a href="{% url 'blog:update_post' pk=post.id %}">update post</a>
 
     {% endfor %}
