@@ -3,6 +3,8 @@ from blog.models import Post
 from blog.forms import PostForm
 from django.views.generic.base import TemplateView , RedirectView
 from django.views.generic import ListView , DetailView , CreateView , UpdateView , DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -22,7 +24,7 @@ class RedirectView(RedirectView) :
 
 
 
-class PostListView(ListView) :
+class PostListView(LoginRequiredMixin,ListView) :
     # model = Post
     # queryset = Post.objects.filter(status=True)
     context_object_name = 'posts'
