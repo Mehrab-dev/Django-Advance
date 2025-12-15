@@ -4,6 +4,9 @@ from blog.forms import PostForm
 from django.views.generic.base import TemplateView , RedirectView
 from django.views.generic import ListView , DetailView , CreateView , UpdateView , DeleteView
 
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 # create the class base views
 class IndexView(TemplateView) :
     template_name = 'index.html'
