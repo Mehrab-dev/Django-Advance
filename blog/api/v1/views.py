@@ -5,6 +5,10 @@ from blog.models import Post , Category
 from .serializers import PostSerializers , CategorySerializer
 from rest_framework import status
 from django.shortcuts import get_object_or_404
+from .permissions import IsOwnerOrReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter , OrderingFilter
+from .paginations import DefaultPaginations
 
 # import for classbaseviews
 from rest_framework.views import APIView
@@ -90,6 +94,7 @@ class PostList(ListCreateAPIView) :
     permission_classes = [IsAuthenticated]
     serializer_class = PostSerializers
     queryset = Post.objects.filter(status=True)
+    
 
 # post detail
 """
@@ -197,9 +202,15 @@ class PostViewSet(viewsets.ViewSet) :
 """
 
 class PostModelViewSet(viewsets.ModelViewSet) :
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated,IsOwnerOrReadOnly]
     serializer_class = PostSerializers
     queryset = Post.objects.filter(status=True)
+    filter_backends = [DjangoFilterBackend,SearchFilter,OrderingFilter]
+    # filterset_fields = ['author','status']
+    filterset_fields = {'category':['exact','in'],'status':['exact','in']}
+    search_fields = ['=title']
+    ordering_fields = ['published_date']
+    pagination_class = DefaultPaginations
 
 class CategoryModelViewSet(viewsets.ModelViewSet) :
     permission_classes = [IsAuthenticated]

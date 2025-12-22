@@ -13,7 +13,7 @@ urlpatterns = [
     # path('post/<int:pk>/',views.PostViewSet.as_view({'get':'retrieve'}),name='post-detail')
 
     path('post/',views.PostModelViewSet.as_view({'get':'list','post':'create'}),name='post_view_model_set'),
-    path('post/<int:pk>/',views.PostModelViewSet.as_view({'get':'retrieve','put':'update','patch':'partial_update','delete':'destroy'})),
+    path('post/<int:pk>/',views.PostModelViewSet.as_view({'get':'retrieve','put':'update','patch':'partial_update','delete':'destroy'}),name='post_detail'),
 
     path('category/',views.CategoryModelViewSet.as_view({'get':'list','post':'create'}),name='category_models_view_set'),
     path('category/<int:pk>/',views.CategoryModelViewSet.as_view({'get':'retrieve','put':'update','patch':'partial_update','delete':'destroy'}))
