@@ -216,5 +216,3 @@ class CategoryModelViewSet(viewsets.ModelViewSet) :
     permission_classes = [IsAuthenticated]
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
-
-    

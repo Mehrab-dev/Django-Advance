@@ -4,8 +4,8 @@ from django.contrib.auth.admin import UserAdmin
 
 class CustomUserAdmin(UserAdmin) :
     model = User
-    list_display = ['email','is_superuser','is_active']
-    list_filter = ['is_superuser','is_active']
+    list_display = ['email','is_superuser','is_active','is_verified']
+    list_filter = ['is_superuser','is_active','is_verified']
     search_fields = ['email','is_superuser','is_active']
     ordering = ('email',)
 
@@ -17,7 +17,7 @@ class CustomUserAdmin(UserAdmin) :
         }),
         ('Permissions',{
             "fields" : (
-                'is_superuser','is_staff','is_active'
+                'is_superuser','is_staff','is_active','is_verified'
             ),
         }),
         ('Group Permissions',{
@@ -36,7 +36,7 @@ class CustomUserAdmin(UserAdmin) :
     add_fieldsets = (
         (None,{
             "classes":("wide"),
-            "fields" : ('email','password1','password2','is_superuser','is_staff','is_active'),
+            "fields" : ('email','password1','password2','is_superuser','is_staff','is_active','is_verified'),
         }),
     )
 

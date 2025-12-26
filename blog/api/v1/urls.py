@@ -16,6 +16,7 @@ urlpatterns = [
     path('post/<int:pk>/',views.PostModelViewSet.as_view({'get':'retrieve','put':'update','patch':'partial_update','delete':'destroy'}),name='post_detail'),
 
     path('category/',views.CategoryModelViewSet.as_view({'get':'list','post':'create'}),name='category_models_view_set'),
-    path('category/<int:pk>/',views.CategoryModelViewSet.as_view({'get':'retrieve','put':'update','patch':'partial_update','delete':'destroy'}))
+    path('category/<int:pk>/',views.CategoryModelViewSet.as_view({'get':'retrieve','put':'update','patch':'partial_update','delete':'destroy'})),
+
 
 ]
