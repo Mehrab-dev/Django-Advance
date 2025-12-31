@@ -22,7 +22,10 @@ urlpatterns = [
     path('jwt/verify/',TokenVerifyView.as_view(),name='jwt_verify'),
 
     path('change_password/',views.ChangePasswordApiView.as_view(),name='change_password'),
-    path('profile/',views.ProfileApiView.as_view(),name='profile')
+    path('profile/',views.ProfileApiView.as_view(),name='profile'),
+
+    # activate-user
+    path('test_email/',views.TestEmail.as_view(),name='test_email')
 
 
     

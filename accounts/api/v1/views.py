@@ -8,6 +8,11 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
 from accounts.models import Profile
 from django.shortcuts import get_object_or_404
+from .utils import EmailThread
+
+from django.core.mail import send_mail
+
+from mail_templated import send_mail , EmailMessage
 
 
 
@@ -81,3 +86,23 @@ class ProfileApiView(generics.RetrieveUpdateAPIView) :
         queryset = self.get_queryset()
         obj = get_object_or_404(queryset,user=self.request.user)
         return obj
+    
+
+class TestEmail(generics.GenericAPIView) :
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+    def get(self,request,*atgs,**kwargs) :
+        # send_mail(
+        #     "Subject here",
+        #     "Here is the message.",
+        #     "from@example.com",
+        #     ["to@example.com"],
+        #     fail_silently=False,
+        #     )
+        # return Response ('email tests')
+        
+        
+        # send_mail('email/hello.tpl', {'name': 'ali'}, 'mehrab88.kh.2425@gmail.com', ['programmer.py.mail@gmail.com'])
+
+        email_object = EmailMessage('email/hello.tpl', {'name': 'ali'}, 'mehrab88.kh.2425@gmail.com', to=['programmer.py.mail@gmail.com'])
+        EmailThread(email_object).start()
+        return Response('email test')
